@@ -21,10 +21,11 @@
 #include <Wire.h>
 
 const int sonarPin = 9;
-const int motorRightSpeedPin=5;
-const int motorRightDirPin=6;
-const int motorLeftSpeedPin=7;
-const int motorLeftDirPin=8;
+
+const int motorRightSpeedPin=8;
+const int motorRightDirPin=7;
+const int motorLeftSpeedPin=6;
+const int motorLeftDirPin=5;
 
 #define  CTRL_REG1  0x203
 #define  CTRL_REG2  0x21
@@ -54,6 +55,9 @@ float dpsPerDigit=.00875f;              // for conversion to degrees per second
 
 NewPing sonar(sonarPin, sonarPin, MAX_DISTANCE); // NewPing setup of pin and maximum distance.
 
+unsigned long pingTimer;
+#define PING_INTERVAL 33  // Milliseconds between pings
+
 void setup() {
   Serial.begin(115200);       // Open serial monitor at 115200 baud
 
@@ -62,6 +66,8 @@ void setup() {
   pinMode(motorLeftSpeedPin,OUTPUT);
   pinMode(motorLeftDirPin,OUTPUT);
 
+  pingTimer=millis()+75+PING_INTERVAL;
+  
   Wire.begin();
   setupGyro();
   calibrateGyro();
@@ -71,17 +77,25 @@ void loop() {
   updateGyroValues();
   updateHeadings();
   
-  printQuaternion();
+/*  printQuaternion();
   Serial.print("    ->    ");
   printEuler();
   Serial.println();
-  
+*/
+  if (millis() >=pingTimer)
+  {
+    Serial.print("Sonar result: ");
+    Serial.println(sonar.ping()/US_ROUNDTRIP_CM);
+  }
+
+/*
       Serial.println("Motors Fast");
       digitalWrite(motorLeftDirPin,LOW);
       analogWrite(motorLeftSpeedPin,255);
       digitalWrite(motorRightDirPin,LOW);
       analogWrite(motorRightSpeedPin, 255);
       delay(1000);
+
       
       Serial.println("Motors Medium");
       digitalWrite(motorLeftDirPin,LOW);
@@ -143,7 +157,7 @@ void loop() {
       delay(1000);
       
       delay (3000);
-  
+ */
 }
 
 void printQuaternion()
