@@ -76,6 +76,74 @@ void loop() {
   printEuler();
   Serial.println();
   
+      Serial.println("Motors Fast");
+      digitalWrite(motorLeftDirPin,LOW);
+      analogWrite(motorLeftSpeedPin,255);
+      digitalWrite(motorRightDirPin,LOW);
+      analogWrite(motorRightSpeedPin, 255);
+      delay(1000);
+      
+      Serial.println("Motors Medium");
+      digitalWrite(motorLeftDirPin,LOW);
+      analogWrite(motorLeftSpeedPin,128);
+      digitalWrite(motorRightDirPin,LOW);
+      analogWrite(motorRightSpeedPin, 128);
+      delay(1000);
+      
+      Serial.println("Motors Slow");
+      digitalWrite(motorLeftDirPin,LOW);
+      analogWrite(motorLeftSpeedPin,50);
+      digitalWrite(motorRightDirPin,LOW);
+      analogWrite(motorRightSpeedPin, 50);
+      delay(1000);
+
+      Serial.println("Motors Stop");
+      digitalWrite(motorLeftDirPin,LOW);
+      analogWrite(motorLeftSpeedPin,0);
+      digitalWrite(motorRightDirPin,LOW);
+      analogWrite(motorRightSpeedPin, 0);
+      delay(2000);
+
+      Serial.println("Motors Reverse Fast");
+      digitalWrite(motorLeftDirPin,HIGH);
+      analogWrite(motorLeftSpeedPin,0);
+      digitalWrite(motorRightDirPin,HIGH);
+      analogWrite(motorRightSpeedPin, 0);
+      delay(1000);
+
+      Serial.println("Motors Reverse Slow");
+      digitalWrite(motorLeftDirPin,HIGH);
+      analogWrite(motorLeftSpeedPin,128);
+      digitalWrite(motorRightDirPin,HIGH);
+      analogWrite(motorRightSpeedPin, 128);
+      delay(1000);
+
+      delay(2000);
+      
+      Serial.println("Motors Opposite Fast");
+      digitalWrite(motorLeftDirPin,HIGH);
+      analogWrite(motorLeftSpeedPin,0);
+      digitalWrite(motorRightDirPin,LOW);
+      analogWrite(motorRightSpeedPin, 255);
+      delay(1000);
+
+      Serial.println("Motors Opposite Slow");
+      digitalWrite(motorLeftDirPin,HIGH);
+      analogWrite(motorLeftSpeedPin,128);
+      digitalWrite(motorRightDirPin,LOW);
+      analogWrite(motorRightSpeedPin, 128);
+      delay(1000);
+
+      delay(2000);
+      Serial.println("Motors Opposite Slow");
+      digitalWrite(motorLeftDirPin,LOW);
+      analogWrite(motorLeftSpeedPin,128);
+      digitalWrite(motorRightDirPin,HIGH);
+      analogWrite(motorRightSpeedPin, 128);
+      delay(1000);
+      
+      delay (3000);
+  
 }
 
 void printQuaternion()
